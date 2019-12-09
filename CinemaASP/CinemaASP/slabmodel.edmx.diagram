@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="75d414b3c9d840a1b8033af3b53f2c9f" Name="Diagram1">
+        <EntityTypeShape EntityType="slabModel.Actors" Width="1.5" PointX="7" PointY="5.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="slabModel.FGAs" Width="1.5" PointX="4.375" PointY="3.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="slabModel.Films" Width="1.5" PointX="0.75" PointY="4.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="slabModel.Genres" Width="1.5" PointX="7.125" PointY="3" IsExpanded="true" />
+        <EntityTypeShape EntityType="slabModel.sysdiagrams" Width="1.5" PointX="12.125" PointY="5.375" IsExpanded="true" />
+        <AssociationConnector Association="slabModel.FK_FGAs_Actors" ManuallyRouted="false" />
+        <AssociationConnector Association="slabModel.FK_FGAs_Films" ManuallyRouted="false" />
+        <AssociationConnector Association="slabModel.FK_FGAs_Genres" ManuallyRouted="false" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>

@@ -1,0 +1,295 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+      <Schema Namespace="Хранилище slabModel" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="Actors">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" Nullable="false" />
+          <Property Name="firstName" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="lastName" Type="nvarchar" MaxLength="50" Nullable="false" />
+        </EntityType>
+        <EntityType Name="FGAs">
+          <Key>
+            <PropertyRef Name="Id" />
+            <PropertyRef Name="Film_Id" />
+            <PropertyRef Name="Genre_Id" />
+            <PropertyRef Name="Actor_Id" />
+          </Key>
+          <Property Name="Id" Type="int" Nullable="false" />
+          <Property Name="Film_Id" Type="int" Nullable="false" />
+          <Property Name="Genre_Id" Type="int" Nullable="false" />
+          <Property Name="Actor_Id" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Films">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" Nullable="false" />
+          <Property Name="Name" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="Year" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Genres">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" Nullable="false" />
+          <Property Name="Name" Type="nvarchar" MaxLength="50" Nullable="false" />
+        </EntityType>
+        <EntityType Name="sysdiagrams">
+          <Key>
+            <PropertyRef Name="diagram_id" />
+          </Key>
+          <Property Name="name" Type="nvarchar" MaxLength="128" Nullable="false" />
+          <Property Name="principal_id" Type="int" Nullable="false" />
+          <Property Name="diagram_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="version" Type="int" />
+          <Property Name="definition" Type="varbinary(max)" />
+        </EntityType>
+        <Association Name="FK_FGAs_Actors">
+          <End Role="Actors" Type="Self.Actors" Multiplicity="1" />
+          <End Role="FGAs" Type="Self.FGAs" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Actors">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="FGAs">
+              <PropertyRef Name="Actor_Id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_FGAs_Films">
+          <End Role="Films" Type="Self.Films" Multiplicity="1" />
+          <End Role="FGAs" Type="Self.FGAs" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Films">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="FGAs">
+              <PropertyRef Name="Film_Id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_FGAs_Genres">
+          <End Role="Genres" Type="Self.Genres" Multiplicity="1" />
+          <End Role="FGAs" Type="Self.FGAs" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Genres">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="FGAs">
+              <PropertyRef Name="Genre_Id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="Хранилище slabModelContainer">
+          <EntitySet Name="Actors" EntityType="Self.Actors" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="FGAs" EntityType="Self.FGAs" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Films" EntityType="Self.Films" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Genres" EntityType="Self.Genres" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK_FGAs_Actors" Association="Self.FK_FGAs_Actors">
+            <End Role="Actors" EntitySet="Actors" />
+            <End Role="FGAs" EntitySet="FGAs" />
+          </AssociationSet>
+          <AssociationSet Name="FK_FGAs_Films" Association="Self.FK_FGAs_Films">
+            <End Role="Films" EntitySet="Films" />
+            <End Role="FGAs" EntitySet="FGAs" />
+          </AssociationSet>
+          <AssociationSet Name="FK_FGAs_Genres" Association="Self.FK_FGAs_Genres">
+            <End Role="Genres" EntitySet="Genres" />
+            <End Role="FGAs" EntitySet="FGAs" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="slabModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="Actors">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" />
+          <Property Name="firstName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="lastName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <NavigationProperty Name="FGAs" Relationship="Self.FK_FGAs_Actors" FromRole="Actors" ToRole="FGAs" />
+        </EntityType>
+        <EntityType Name="FGAs">
+          <Key>
+            <PropertyRef Name="Id" />
+            <PropertyRef Name="Film_Id" />
+            <PropertyRef Name="Genre_Id" />
+            <PropertyRef Name="Actor_Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" />
+          <Property Name="Film_Id" Type="Int32" Nullable="false" />
+          <Property Name="Genre_Id" Type="Int32" Nullable="false" />
+          <Property Name="Actor_Id" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Actors" Relationship="Self.FK_FGAs_Actors" FromRole="FGAs" ToRole="Actors" />
+          <NavigationProperty Name="Films" Relationship="Self.FK_FGAs_Films" FromRole="FGAs" ToRole="Films" />
+          <NavigationProperty Name="Genres" Relationship="Self.FK_FGAs_Genres" FromRole="FGAs" ToRole="Genres" />
+        </EntityType>
+        <EntityType Name="Films">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" />
+          <Property Name="Name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Year" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="FGAs" Relationship="Self.FK_FGAs_Films" FromRole="Films" ToRole="FGAs" />
+        </EntityType>
+        <EntityType Name="Genres">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" />
+          <Property Name="Name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <NavigationProperty Name="FGAs" Relationship="Self.FK_FGAs_Genres" FromRole="Genres" ToRole="FGAs" />
+        </EntityType>
+        <EntityType Name="sysdiagrams">
+          <Key>
+            <PropertyRef Name="diagram_id" />
+          </Key>
+          <Property Name="name" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="principal_id" Type="Int32" Nullable="false" />
+          <Property Name="diagram_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="version" Type="Int32" />
+          <Property Name="definition" Type="Binary" MaxLength="Max" FixedLength="false" />
+        </EntityType>
+        <Association Name="FK_FGAs_Actors">
+          <End Role="Actors" Type="Self.Actors" Multiplicity="1" />
+          <End Role="FGAs" Type="Self.FGAs" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Actors">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="FGAs">
+              <PropertyRef Name="Actor_Id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_FGAs_Films">
+          <End Role="Films" Type="Self.Films" Multiplicity="1" />
+          <End Role="FGAs" Type="Self.FGAs" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Films">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="FGAs">
+              <PropertyRef Name="Film_Id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_FGAs_Genres">
+          <End Role="Genres" Type="Self.Genres" Multiplicity="1" />
+          <End Role="FGAs" Type="Self.FGAs" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Genres">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="FGAs">
+              <PropertyRef Name="Genre_Id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="slabEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="Actors" EntityType="Self.Actors" />
+          <EntitySet Name="FGAs" EntityType="Self.FGAs" />
+          <EntitySet Name="Films" EntityType="Self.Films" />
+          <EntitySet Name="Genres" EntityType="Self.Genres" />
+          <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" />
+          <AssociationSet Name="FK_FGAs_Actors" Association="Self.FK_FGAs_Actors">
+            <End Role="Actors" EntitySet="Actors" />
+            <End Role="FGAs" EntitySet="FGAs" />
+          </AssociationSet>
+          <AssociationSet Name="FK_FGAs_Films" Association="Self.FK_FGAs_Films">
+            <End Role="Films" EntitySet="Films" />
+            <End Role="FGAs" EntitySet="FGAs" />
+          </AssociationSet>
+          <AssociationSet Name="FK_FGAs_Genres" Association="Self.FK_FGAs_Genres">
+            <End Role="Genres" EntitySet="Genres" />
+            <End Role="FGAs" EntitySet="FGAs" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="Хранилище slabModelContainer" CdmEntityContainer="slabEntities">
+          <EntitySetMapping Name="Actors">
+            <EntityTypeMapping TypeName="slabModel.Actors">
+              <MappingFragment StoreEntitySet="Actors">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="firstName" ColumnName="firstName" />
+                <ScalarProperty Name="lastName" ColumnName="lastName" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="FGAs">
+            <EntityTypeMapping TypeName="slabModel.FGAs">
+              <MappingFragment StoreEntitySet="FGAs">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Film_Id" ColumnName="Film_Id" />
+                <ScalarProperty Name="Genre_Id" ColumnName="Genre_Id" />
+                <ScalarProperty Name="Actor_Id" ColumnName="Actor_Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Films">
+            <EntityTypeMapping TypeName="slabModel.Films">
+              <MappingFragment StoreEntitySet="Films">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="Year" ColumnName="Year" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Genres">
+            <EntityTypeMapping TypeName="slabModel.Genres">
+              <MappingFragment StoreEntitySet="Genres">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="sysdiagrams">
+            <EntityTypeMapping TypeName="slabModel.sysdiagrams">
+              <MappingFragment StoreEntitySet="sysdiagrams">
+                <ScalarProperty Name="name" ColumnName="name" />
+                <ScalarProperty Name="principal_id" ColumnName="principal_id" />
+                <ScalarProperty Name="diagram_id" ColumnName="diagram_id" />
+                <ScalarProperty Name="version" ColumnName="version" />
+                <ScalarProperty Name="definition" ColumnName="definition" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="false" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="Нет" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

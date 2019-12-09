@@ -1,0 +1,42 @@
+﻿@model CinemaASP.FGAs
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>FGAs</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.Actors.firstName)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Actors.firstName)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Films.Name)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Films.Name)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Genres.Name)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Genres.Name)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { /* id = Model.PrimaryKey */ }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>
